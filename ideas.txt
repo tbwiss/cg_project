@@ -1,0 +1,35 @@
+
+TODO:
+- versch. gebäude texturen
+- see
+- cockpit bild
+- boden bei gebäude, evtl
+
+
+
+
+
+
+
+
+
+
+
+
+
+DONE:
+
+- Strasse -T
+- See  - M
+- sport -T
+- Gebäude sollen sich nicht mehr schneiden - T
+- Tag/Nach Zyklus  - T
+
+- cockpit sicht  - M
+
+- licht in gebäude   - T
+
+
+
+- y kamera nicht unter 0 (unter die city gehen vebroten) 
+    -> oder U-bahn "schläuche" unter der city machen... ;-)

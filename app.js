@@ -11,7 +11,7 @@ app.get('/', function(req, res) {
 
 
 
-//[INFO] start server: Takes either in arguments (this often means console!) specified Port and IP or the default values
+//[INFO] start server: Takes either in arguments (console!) specified Port and IP or the default values
 server.listen(process.argv[2] || process.env.PORT || 3000, process.argv[3] || process.env.IP || "0.0.0.0", function() {
 	var addr = server.address();
 	console.log("Webserver running at", addr.address + ":" + addr.port);
