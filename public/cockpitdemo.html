@@ -1,13 +1,12 @@
 <!doctype html>
 <html lang="en">
 	<head>
-		<title>cockpit.js demo over three.js fly camera example</title>
+		<title>City - CG Projekt</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
 			body {
-				background:#000;
-				color: #eee;
+				background-color: #d8e7ff;
 				padding:0;
 				margin:0;
 				font-weight:bold;
@@ -82,9 +81,14 @@
 
 		</style>
 
-		<script src="./vendor/three.js/build/three.min.js"></script>
-		<script src='threex.cgcity2.js'></script>
-        <script src='threex.daynight.js'></script>
+		<script src='./vendor/three.js/build/three.min.js'></script>
+	    <script src='./vendor/three.js/examples/js/controls/FirstPersonControls.js'></script>
+	    <script src='./vendor/curve_func.min.js'></script>
+	    <script src='./vendor/curve_calc.min.js'></script>
+	    <script src='./vendor/curve.min.js'></script>
+	    <script src='threex.cgcity3.js'></script>
+	    <script src='threex.daynight.js'></script>
+	    <script src='main.js'></script>
 
 		<script src="./vendor/three.js/examples/js/ShaderExtras.js"></script>
 
@@ -106,12 +110,7 @@
 
 	<body>
 
-		<div id="info">
-            <a href="http://jensarps.github.com/cockpit.js/" target="_blank">cockpit.js</a> overlay demo<br/>
-            [over a webgl demo from <a href="http://github.com/mrdoob/three.js" target="_blank">three.js</a>]<br/>
-            <br/>
-		    <b>W|S</b> thrust - <b>Q|E</b> roll
-		</div>
+		
 
 		<script>
 
@@ -139,10 +138,7 @@
             var cockpit = new Cockpit('./images/cockpit.png');
             var cockpitState = 'normal';
 
-            cockpit.addText('hud-speed', 'SPD:');
-            cockpit.addText('hud-thrust', 'PWR:');
-
-            cockpit.addText('hud-force', 'F:');
+            
 
             document.body.addEventListener('mousemove', function(evt){
                 var vert = ( SCREEN_HEIGHT / 2 - evt.clientY ) / ( SCREEN_HEIGHT / 2 ) * -0.8;
@@ -161,90 +157,84 @@
 			function bodyload() {
     
             	var renderer	= new THREE.WebGLRenderer({
-            		antialiasing	: true
-            	});
-            	renderer.setSize( window.innerWidth, window.innerHeight );
-            	document.body.appendChild( renderer.domElement );
-            
-            	var updateFcts	= [];
-            	var scene	= new THREE.Scene();
-            	scene.fog	= new THREE.FogExp2( 0xd0e0f0, 0.0021 );
-            	var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000 );
-            	camera.position.z = 45;
-                camera.position.y = 45;
-            
-            	
-            	var proceduralCity	= new THREEx.ProceduralCity(renderer)
-            	// var building		= proceduralCity.getBuilding().clone()
-            	// proceduralCity.scaleBuilding(building)
-            	// proceduralCity.colorifyBuilding(building)
-            	// scene.add(building)	
-            
-            	//var mesh	= proceduralCity.createSquareCity()
-            	var mesh	= proceduralCity.createCGCity();
-            	scene.add(mesh);
-            
-            
-            	var light	= new THREE.HemisphereLight( 0xfffff0, 0x101020, 0.35 );
-            	light.position.set( 0.75, 1, 0.25 );
-            	scene.add( light );
-            	
-            	
-            	/*
-            	var sunAngle = -1/6*Math.PI*2;
-            	//var sunAngle = -3/6*Math.PI*2;
-            	updateFcts.push(function(delta, now){
-            		var dayDuration	= 20	// nb seconds for a full day cycle
-            		sunAngle	+= delta/dayDuration * Math.PI*2
-            	})
-            	
-            	var sunSphere	= new THREEx.DayNight.SunSphere(1400)
-            	scene.add( sunSphere.object3d )
-            	updateFcts.push(function(delta, now){
-            		sunSphere.update(sunAngle)
-            	})
-            	
-            	var sunLight	= new THREEx.DayNight.SunLight()
-            	scene.add( sunLight.object3d )
-            	updateFcts.push(function(delta, now){
-            		sunLight.update(sunAngle)
-            	})*/
-            	
-            
-            
-            
-            	var controls	= new THREE.FirstPersonControls( camera );
-            //	var controls	= new THREE.SpaceshipControls( camera );
-            	controls.movementSpeed	= 40;
-            	controls.lookSpeed	= 0.05;
-            	controls.lookVertical	= true;
-            	controls.lookVerticalNotBelowZero = true;
-            	updateFcts.push(function(delta, now){
-            		controls.update( delta );		
-            	});
-            
-            
-            
-            	// render the scene						
-            	updateFcts.push(function(){
-            		renderer.render( scene, camera );		
-            	});
-            	
-            
-            	// loop runner							
-            	var lastTimeMsec= null
-            	requestAnimationFrame(function animate(nowMsec){
-            
-            		requestAnimationFrame( animate );
-            
-            		lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
-            		var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
-            		lastTimeMsec	= nowMsec
-            
-            		updateFcts.forEach(function(updateFn){
-            			updateFn(deltaMsec/1000, nowMsec/1000)
-            		})
-            	});
+					antialiasing	: true
+				});
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				document.body.appendChild( renderer.domElement );
+			
+				var updateFcts	= [];
+				var scene	= new THREE.Scene();
+				scene.fog	= new THREE.FogExp2( 0xd0e0f0, 0.0011 );
+				var camera	= new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1800 );
+				camera.position.z = 45;
+			    camera.position.y = 45;
+			
+				
+				var proceduralCity	= new THREEx.ProceduralCity(renderer);
+				var mesh	= proceduralCity.createCGCity();
+				scene.add(mesh);
+			
+			
+				var light	= new THREE.HemisphereLight( 0xfffff0, 0x101020, 0.35 );
+				light.position.set( 0.75, 1, 0.25 );
+				scene.add( light );
+				
+				
+				
+				var sunAngle = -1/6*Math.PI*2;
+				//var sunAngle = -3/6*Math.PI*2;
+				updateFcts.push(function(delta, now){
+					var dayDuration	= 10	// nb seconds for a full day cycle
+					sunAngle	+= delta/dayDuration * Math.PI*2
+				})
+				
+				var sunSphere	= new THREEx.DayNight.SunSphere(2000)
+				scene.add( sunSphere.object3d )
+				updateFcts.push(function(delta, now){
+					sunSphere.update(sunAngle)
+				})
+				
+				var sunLight	= new THREEx.DayNight.SunLight()
+				scene.add( sunLight.object3d )
+				updateFcts.push(function(delta, now){
+					sunLight.update(sunAngle)
+				})
+				
+			
+			
+			
+				
+				var controls	= new THREE.FirstPersonControls( camera );
+				controls.movementSpeed	= 150;
+				controls.lookSpeed	= 0.10;
+				controls.lookVertical	= true;
+				controls.lookVerticalNotBelowZero = true;
+				updateFcts.push(function(delta, now){
+					controls.update( delta );		
+				});
+			
+			
+			
+				// render the scene						
+				updateFcts.push(function(){
+					renderer.render( scene, camera );		
+				});
+				
+			
+				// loop runner							
+				var lastTimeMsec= null
+				requestAnimationFrame(function animate(nowMsec){
+			
+					requestAnimationFrame( animate );
+			
+					lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
+					var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
+					lastTimeMsec	= nowMsec
+			
+					updateFcts.forEach(function(updateFn){
+						updateFn(deltaMsec/1000, nowMsec/1000)
+					})
+				});
             };
 
 		

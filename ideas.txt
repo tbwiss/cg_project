@@ -1,9 +1,10 @@
 
 TODO:
 - versch. gebäude texturen
-- see
-- cockpit bild
 - boden bei gebäude, evtl
+
+
+
 
 
 
@@ -29,7 +30,7 @@ DONE:
 
 - licht in gebäude   - T
 
-
+- cockpit bild
 
 - y kamera nicht unter 0 (unter die city gehen vebroten) 
     -> oder U-bahn "schläuche" unter der city machen... ;-)

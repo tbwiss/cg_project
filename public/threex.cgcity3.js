@@ -40,8 +40,8 @@ THREEx.ProceduralCity	= function(renderer){
 	
 	var nBlockX	= 30
 	var nBlockZ	= 30
-	var blockSizeX	= 70
-	var blockSizeZ	= 70
+	var blockSizeX	= 100
+	var blockSizeZ	= 100
 	
 	var blockDensity= 5
 	var roadW	= 8
